@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erika meu amor!!!!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: black; /* Define o fundo como preto */
+            color: white; /* Define a cor do texto como branco */
+        }
+        input[type="text"], input[type="number"], input[type="submit"] {
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+        #resultado {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculadora Erika</h1>
+    <form id="freteForm">
+        <label for="valorNota">Valor da nota fiscal (R$):</label><br>
+        <input type="number" id="valorNota" name="valorNota" step="0.01" required><br>
+        
+        <label for="localizacao">Localização (capital/interior):</label><br>
+        <input type="text" id="localizacao" name="localizacao" required><br>
+        
+        <input type="submit" value="Calcular Tarifa de Frete">
+    </form>
+    <div id="resultado"></div>
+
+    <script>
+        document.getElementById("freteForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            var valorNota = parseFloat(document.getElementById("valorNota").value);
+            var localizacao = document.getElementById("localizacao").value.toLowerCase();
+
+            var valorMinimoCapital = 140;
+            var valorMinimoInterior = 240;
+
+            if (localizacao === "capital" || localizacao === "interior") {
+                if (localizacao === "capital" && valorNota < valorMinimoCapital) {
+                    document.getElementById("resultado").innerHTML = `
+                        <p>O valor mínimo para a nota fiscal na capital é de R$ ${valorMinimoCapital.toFixed(2)}</p>
+                    `;
+                } else if (localizacao === "interior" && valorNota < valorMinimoInterior) {
+                    document.getElementById("resultado").innerHTML = `
+                        <p>O valor mínimo para a nota fiscal no interior é de R$ ${valorMinimoInterior.toFixed(2)}</p>
+                    `;
+                } else {
+                    var tarifa;
+
+                    if (localizacao === "capital") {
+                        tarifa = valorNota * (7 / 100);
+                    } else {
+                        tarifa = valorNota * (8.5 / 100);
+                    }
+
+                    tarifa /= 0.94;
+
+                    document.getElementById("resultado").innerHTML = `
+                        <p>A tarifa de frete para uma nota fiscal de R$ ${valorNota.toFixed(2)} na localização ${localizacao} é: R$ ${tarifa.toFixed(2)}</p>
+                    `;
+                }
+            } else {
+                document.getElementById("resultado").innerHTML = "<p>Localização inválida. Por favor, insira 'capital' ou 'interior'.</p>";
+            }
+        });
+    </script>
+</body>
+</html>
