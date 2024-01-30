@@ -29,4 +29,4 @@ Nota Importante
 
     Desenvolvido por Hebert Ribeiro - JAN-2024
 
-# Por favor, sinta-se à vontade para entrar em contato em caso de dúvidas ou sugestões de melhorias.****
+Por favor, sinta-se à vontade para entrar em contato em caso de dúvidas ou sugestões de melhorias.****
