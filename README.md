@@ -3,7 +3,7 @@
 Este é um simples script em HTML e JavaScript para calcular tarifas de frete com base no valor da nota fiscal e na localização (capital ou interior).
 Instruções de Uso
 
-    Abra o arquivo index.html em um navegador da web.
+    Abra o arquivo calculadora_de_frete.html em um navegador da web.
     Preencha os campos obrigatórios no formulário:
         Valor da nota fiscal (R$): Insira o valor total da nota fiscal.
         Localização (capital/interior): Insira a localização onde será entregue a mercadoria (capital ou interior).
