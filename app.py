@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return open('index.html').read()
+    return open('calculadora_planilha.html').read()
 
 @app.route('/calcular_tarifa_de_frete', methods=['POST'])
 def calcular_tarifa_de_frete():
@@ -35,8 +35,8 @@ def calcular_tarifa_de_frete():
             if 'NF_VALOR' not in df.columns or 'MUNICIPIO' not in df.columns:
                 raise ValueError("Colunas 'NF_VALOR' e 'MUNICIPIO' são necessárias na planilha")
 
-            # Calcula a tarifa de frete
-            df['Tarifa_de_Frete'] = df.apply(lambda row: row['NF_VALOR'] * (0.07 if row['MUNICIPIO'] == 'Belo Horizonte' else 0.085) * 0.94, axis=1)
+            # Calcula a tarifa de frete com verificação do valor mínimo e arredondamento
+            df['Tarifa_de_Frete'] = df.apply(lambda row: calculate_freight(row['NF_VALOR'], row['MUNICIPIO']), axis=1)
 
             # Salva a nova planilha com a coluna de cálculo de frete
             output_file_path = 'planilha_com_frete.xlsx'
@@ -47,12 +47,25 @@ def calcular_tarifa_de_frete():
 
             # Retorna o arquivo resultante
             return send_file(output_file_path, as_attachment=True)
-
         except Exception as e:
             return jsonify({'error': str(e)}), 400
 
     else:
         return jsonify({'error': 'Formato de arquivo inválido, selecione uma planilha XLSX'}), 400
+
+
+def calculate_freight(nf_valor, municipio):
+    # Define os valores mínimos para o cálculo da taxa
+    valor_minimo_bh = 140
+    valor_minimo_outros = 240
+
+    # Verifica se o valor da nota fiscal é maior ou igual ao valor mínimo
+    if (municipio == 'Belo Horizonte' and nf_valor >= valor_minimo_bh) or (municipio != 'Belo Horizonte' and nf_valor >= valor_minimo_outros):
+        # Calcula a tarifa de frete com base no valor da nota fiscal e na localização
+        taxa = nf_valor * (0.07 if municipio == 'Belo Horizonte' else 0.085) * 0.94
+        return round(taxa, 2)  # Arredonda para duas casas decimais
+    else:
+        return 'Valor mínimo não atingido'
 
 
 if __name__ == '__main__':
