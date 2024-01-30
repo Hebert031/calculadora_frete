@@ -56,4 +56,4 @@ Instruções de Uso
 Este aplicativo foi desenvolvido como um exemplo educacional e pode não ser adequado para ambientes de produção sem considerar possíveis ajustes e validações adicionais.
 Autor
 
-# Desenvolvido por Hebert Ribeiro - JAN-2024
+Desenvolvido por Hebert Ribeiro - JAN-2024
