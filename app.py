@@ -62,7 +62,7 @@ def calculate_freight(nf_valor, municipio):
     # Verifica se o valor da nota fiscal é maior ou igual ao valor mínimo
     if (municipio == 'Belo Horizonte' and nf_valor >= valor_minimo_bh) or (municipio != 'Belo Horizonte' and nf_valor >= valor_minimo_outros):
         # Calcula a tarifa de frete com base no valor da nota fiscal e na localização
-        taxa = nf_valor * (0.07 if municipio == 'Belo Horizonte' else 0.085) * 0.94
+        taxa = nf_valor * (0.07 if municipio == 'Belo Horizonte' else 0.085) / 0.94
         return round(taxa, 2)  # Arredonda para duas casas decimais
     else:
         return 'Valor mínimo não atingido'
