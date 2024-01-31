@@ -54,6 +54,7 @@ Instruções de Uso
 # Nota Importante
 
 Este aplicativo foi desenvolvido como um exemplo educacional e pode não ser adequado para ambientes de produção sem considerar possíveis ajustes e validações adicionais.
+# Observação: A planilha fornecida deve incluir obrigatoriamente as colunas NF_VALOR e MUNICIPIO.
 # Autor
 
 Desenvolvido por Hebert Ribeiro - JAN-2024
