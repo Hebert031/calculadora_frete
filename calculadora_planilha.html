@@ -5,100 +5,160 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>1 Pedro 5:7</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            padding: 20px;
-        }
+@import url('https://fonts.googleapis.com/css2?family=Sixtyfour&display=swap');
 
-        h1 {
-            color: #333;
-            text-align: center;
-        }
+body {
+    font-family: Arial, sans-serif;
+    background-color: hsl(210, 13%, 56%);
+    padding: 20px;
+}
 
-        form {
-            margin-top: 20px;
-            text-align: center;
-        }
+h1 {
+    color: #333;
+    text-align: center;
+    font-family: 'Sixtyfour', sans-serif;
+}
 
-        label {
-            font-weight: bold;
-            margin-right: 10px;
-        }
+form {
+    margin-top: 20px;
+    text-align: center;
+}
 
-        input[type="file"] {
-            margin-bottom: 10px;
-            padding: 10px; /* Adiciona espaço interno ao redor do input */
-            background-color: #f0f0f0; /* Cor de fundo do input */
-            border: 1px solid #ddd; /* Adiciona uma borda ao redor do input */
-            border-radius: 5px; /* Borda arredondada */
-            outline: none; /* Remove a borda padrão quando o input está em foco */
-            cursor: pointer; /* Altera o cursor ao passar sobre o input */
-            transition: background-color 0.3s, border-color 0.3s; /* Transições suaves */
-        }
+label {
+    font-weight: bold;
+    margin-right: 10px;
+}
 
-        input[type="file"]:hover {
-            background-color: #e0e0e0; /* Altera a cor de fundo ao passar o mouse sobre o input */
-        }
+input[type="file"] {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+    width: 100%;
+    box-sizing: border-box;
+}
 
-        input[type="file"]:focus {
-            border-color: #4CAF50; /* Altera a cor da borda quando o input está em foco */
-        }
+input[type="file"]:hover {
+    background-color: #e0e0e0;
+}
 
-        button[type="submit"] {
-            padding: 12px 24px;
-            background-color: #4CAF50; /* Cor de fundo */
-            color: white; /* Cor do texto */
-            border: none;
-            border-radius: 6px; /* Borda arredondada */
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Sombra */
-            transition: background-color 0.3s, transform 0.2s ease-out;
-        }
+input[type="file"]:focus {
+    border-color: #4CAF50;
+}
 
-        button[type="submit"]:hover {
-            background-color: #45a049; /* Cor de fundo ao passar o mouse */
-            transform: translateY(-2px); /* Efeito de levantamento */
-        }
+button[type="submit"] {
+    padding: 12px 24px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    transition: background-color 0.3s, transform 0.2s ease-out;
+    width: 100%;
+    box-sizing: border-box;
+}
 
-        button[type="submit"]:active {
-            transform: translateY(0); /* Retorna à posição original ao clicar */
-            box-shadow: none; /* Remove a sombra ao clicar */
-        }
+button[type="submit"]:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+button[type="submit"]:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+@media only screen and (min-width: 600px) {
+    form {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+}
+
+form {
+    margin-top: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    font-weight: bold;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    text-align: left;
+    width: 100%;
+}
+
+input[type="number"],
+input[type="file"] {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+    width: 100%;
+    box-sizing: border-box;
+}
     </style>
 </head>
 <body>
     <h1>Calculadora de Frete <b>(Lançando sobre ele toda a vossa ansiedade, porque ele tem cuidado de vós. 1Pedro 5:7)</b></h1>
-    <form id="uploadForm" enctype="multipart/form-data">
-        <label for="file">Selecione a planilha XLS:</label>
-        <input type="file" id="file" name="file">
-        <button type="submit">Enviar</button>
-    </form>
+<form id="uploadForm" enctype="multipart/form-data">
+    <label for="file">Selecione a planilha XLS:</label>
+    <input type="file" id="file" name="file">
+    <label for="taxa-capital">Taxa Capital % (em decimal):</label>
+    <input type="number" id="taxa-capital" name="taxa-capital" step="0.01" placeholder="0.07">
+    <label for="taxa-interior">Taxa Interior % (em decimal):</label>
+    <input type="number" id="taxa-interior" name="taxa-interior" step="0.01" placeholder="0.085">
+    <label for="taxa-geral">Taxa Geral % (em decimal):</label>
+    <input type="number" id="taxa-geral" name="taxa-geral" step="0.01" placeholder="0.94">
+    <button type="submit">Enviar</button>
+</form>
 
     <script>
-        document.getElementById('uploadForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            var formData = new FormData();
-            var fileInput = document.getElementById('file');
-            formData.append('file', fileInput.files[0]);
-            
-            fetch('/calcular_tarifa_de_frete', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.blob())
-            .then(blob => {
-                var url = window.URL.createObjectURL(blob);
-                var a = document.createElement('a');
-                a.href = url;
-                a.download = 'planilha_com_frete.xls';
-                document.body.appendChild(a);
-                a.click();
-                window.URL.revokeObjectURL(url);
-            })
-            .catch(error => console.error('Erro:', error));
-        });
+document.getElementById('uploadForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    var formData = new FormData();
+    var fileInput = document.getElementById('file');
+    formData.append('file', fileInput.files[0]);
+
+    // Obtém os valores das taxas do formulário
+    var taxaCapitalInput = document.getElementById('taxa-capital');
+    var taxaInteriorInput = document.getElementById('taxa-interior');
+    var taxaGeralInput = document.getElementById('taxa-geral');
+
+    // Adiciona os valores das taxas ao FormData
+    formData.append('taxa-capital', taxaCapitalInput.value);
+    formData.append('taxa-interior', taxaInteriorInput.value);
+    formData.append('taxa-geral', taxaGeralInput.value);
+    
+    fetch('/calcular_tarifa_de_frete', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.blob())
+    .then(blob => {
+        var url = window.URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'planilha_com_frete.xls';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+    })
+    .catch(error => console.error('Erro:', error));
+});
     </script>
 </body>
 </html>
