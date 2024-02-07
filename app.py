@@ -25,6 +25,10 @@ def calcular_tarifa_de_frete():
     if file.filename == '':
         return jsonify({'error': 'Nenhum arquivo selecionado'}), 400
 
+    taxa_capital = float(request.form.get('taxa-capital', '0.07'))
+    taxa_interior = float(request.form.get('taxa-interior', '0.085'))
+    taxa_geral = float(request.form.get('taxa-geral', '0.94'))
+
     if file and file.filename.endswith('.xlsx'):
         # Salva o arquivo temporariamente
         file_path = 'temp.xlsx'
@@ -44,8 +48,7 @@ def calcular_tarifa_de_frete():
                 raise ValueError("Colunas 'NF_VALOR' e 'MUNICIPIO' são necessárias na planilha")
 
             # Calcula a tarifa de frete e arredonda para duas casas decimais
-            df['Tarifa_de_Frete'] = df.apply(lambda row: round(row['NF_VALOR'] * (0.07 if row['MUNICIPIO'].upper() in cidades_taxa_7 else 0.085) / 0.94, 2), axis=1)
-
+            df['TARIFA_FRETE'] = df.apply(lambda row: round(row['NF_VALOR'] * (taxa_capital if row['MUNICIPIO'].upper() in cidades_taxa_7 else taxa_interior) / taxa_geral, 2), axis=1)
             # Salva a nova planilha com a coluna de cálculo de frete
             output_file_path = 'planilha_com_frete.xlsx'
             df.to_excel(output_file_path, index=False, float_format="%.2f")  # Define o formato float para duas casas decimais
