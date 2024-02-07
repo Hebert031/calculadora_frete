@@ -7,13 +7,46 @@
     <style>
 @import url('https://fonts.googleapis.com/css2?family=Sixtyfour&display=swap');
 
+:root {
+    --cor-primaria: #000000;
+    --cor-secundaria: #F6F6F6;
+    --cor-terciaria: #33f50c;
+    --cor-hover: #272727;
+ 
+    --fonte-secundaria: 'Montserrat', sans-serif;
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+
+
 body {
     font-family: Arial, sans-serif;
     background-color: hsl(210, 13%, 56%);
     padding: 20px;
 }
 
+
+p {
+    color: #333;
+    text-align: center;
+    font-family: 'Krona One', sans-serif;
+}
+
 h1 {
+    color: #333;
+    text-align: center;
+    font-family: 'Sixtyfour', sans-serif;
+}
+
+h2 {
+    color: #333;
+    text-align: center;
+    font-family: 'Sixtyfour', sans-serif;
+}
+
+h3 {
     color: #333;
     text-align: center;
     font-family: 'Sixtyfour', sans-serif;
@@ -109,10 +142,23 @@ input[type="file"] {
     width: 100%;
     box-sizing: border-box;
 }
+
+.rodape{
+    color: var(--cor-primaria);
+    background-color: var(--cor-terciaria);
+    padding: 12px;
+    text-align: center;
+    font-family: var(--fonte-secundaria);
+    font-size: 18px;
+    font-weight: 600;
+}
     </style>
 </head>
 <body>
-    <h1>Calculadora de Frete <b>(Lançando sobre ele toda a vossa ansiedade, porque ele tem cuidado de vós. 1Pedro 5:7)</b></h1>
+<main>
+    <h1>Calculadora de Frete</h1>
+    <h2>Lançando sobre ele toda a vossa ansiedade, porque ele tem cuidado de vós.</h2>
+    <h3>1Pedro 5:7 </h3>
 <form id="uploadForm" enctype="multipart/form-data">
     <label for="file">Selecione a planilha XLS:</label>
     <input type="file" id="file" name="file">
@@ -124,7 +170,22 @@ input[type="file"] {
     <input type="number" id="taxa-geral" name="taxa-geral" step="0.01" placeholder="0.94">
     <button type="submit">Enviar</button>
 </form>
+</br>
+</br>
+<p>
+Este é um aplicativo que calcula tarifas de frete com base no valor da nota fiscal e na localização (capital ou interior) 
+dos destinatários. O aplicativo agora suporta a leitura de uma planilha XLSX para calcular as tarifas de frete. Instruções de Uso:
+Tarifa de frete é calculada com base no valor da nota fiscal e na localização da entrega.
+Para localizações na capital, Exemplo: a tarifa é de 0,7% do valor da nota fiscal.
+Para localizações no interior, Exemplo a tarifa é de 0,85% do valor da nota fiscal.
+Uma taxa de 6% (0,94) de desconto é aplicada à tarifa calculada. 
+Observação: A planilha fornecida deve incluir obrigatoriamente as colunas NF_VALOR e MUNICIPIO.
+</p>
+</main>
 
+    <footer class="rodape">
+        <p>Calculadora de Frete - Desenvolvido por Hebert Ribeiro. Copyright © 2024</p>
+    </footer>
     <script>
 document.getElementById('uploadForm').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -161,4 +222,5 @@ document.getElementById('uploadForm').addEventListener('submit', function(event)
 });
     </script>
 </body>
+
 </html>
